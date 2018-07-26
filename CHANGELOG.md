@@ -8,4 +8,4 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-* 🔥🔥🔥 release 1.0.0 ([6dcce26](https://github.com/dimabory/ecoji-js/commit/6dcce26))
+* 🔥🔥🔥 release 1.0.0 ([e331f99](https://github.com/dimabory/ecoji-js/commit/e331f99))
