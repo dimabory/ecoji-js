@@ -1,3 +1,5 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Node template
 # Logs
 logs
 *.log
@@ -60,5 +62,8 @@ typings/
 # next.js build output
 .next
 
+lib/
+docs
+typedoc.js
+
 .idea
-dist
