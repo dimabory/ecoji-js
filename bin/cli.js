@@ -7,14 +7,14 @@ stdin().then(input => {
 
   if (argv.d) {
     try {
-      process.stdout.write(ecoji.default.decode(input.toString()))
+      process.stdout.write(ecoji.decode(input.toString()))
     } catch (e) {
       process.stderr.write('You have provided incorrect data')
       console.error(e)
     }
     process.stdout.write('\n')
   } else {
-    process.stdout.write(ecoji.default.encode(input))
+    process.stdout.write(ecoji.encode(input))
     process.stdout.write('\n')
   }
 
