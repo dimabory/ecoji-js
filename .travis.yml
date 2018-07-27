@@ -20,3 +20,8 @@ script:
 
 after_script:
 - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email:
+    on_failure: always
+    on_success: never
