@@ -14,7 +14,7 @@
     "algo"
   ],
   "author": "Dmytro Borysovskyi",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/dimabory/ecoji-js/issues"
   },
