@@ -1,5 +1,6 @@
 # ecoji-js | 1️⃣0️⃣2️⃣4️⃣  👨‍💻🔥#️⃣🌎🛫🕶️
 
+[![npm version](https://badge.fury.io/js/ecoji-js.svg)](https://www.npmjs.com/package/ecoji-js)
 [![Build Status](https://travis-ci.com/dimabory/ecoji-js.svg?branch=master)](https://travis-ci.com/dimabory/ecoji-js)
 [![codecov](https://codecov.io/gh/dimabory/ecoji-js/branch/master/graph/badge.svg)](https://codecov.io/gh/dimabory/ecoji-js)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
