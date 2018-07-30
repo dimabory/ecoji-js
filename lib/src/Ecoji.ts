@@ -12,7 +12,7 @@ export default class Ecoji {
   public encode(input: string): string {
     let output = ''
 
-    const bufferIterator = Buffer.from(input.encode())
+    const bufferIterator = Buffer.from(input.encode(), 'binary')
     const values         = bufferIterator.values()
 
     let length = bufferIterator.length
