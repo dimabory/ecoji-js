@@ -70,4 +70,4 @@ Read more about standard by following above link.
 ## License
 This project is licensed under the terms of the [Apache License 2.0](LICENSE).
 
-Copyright (©️) 2018 Dmytro Borysovskyi
+Copyright (©️) 2019 Dmytro Borysovskyi
