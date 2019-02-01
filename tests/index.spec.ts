@@ -5,7 +5,7 @@ const data: any[] = require('./test.json')
 describe('ecoji', () => {
 
   data.forEach(item => {
-    it('should be encoded/decoded', () => {
+    it(`${JSON.stringify(item)} encode/decode`, () => {
       expect(ecoji.encode(item.input)).toEqual(item.output)
       expect(ecoji.decode(item.output)).toEqual(item.input)
     })
@@ -30,11 +30,12 @@ describe('ecoji', () => {
       '🤠',
       '🤠🤠',
       '🤠🤠🤠',
+      '🤠🤠🤠🤠🤠',
       '→',
       '→↑',
       '→↑←',
     ].forEach(item => {
-      expect(() => ecoji.decode(item)).toThrow(new Error('Unexpected data provided. Expected more than 4 emojis'))
+      expect(() => ecoji.decode(item)).toThrow(new Error('Unexpected emoji sequence provided.'))
     })
   })
 

@@ -97,7 +97,7 @@ export default class Ecoji {
     while (emojis.length) {
 
       if (emojis.length < 4) {
-        throw Error('Unexpected data provided. Expected more than 4 emojis')
+        throw Error('Unexpected emoji sequence provided.')
       }
 
       const runes = emojis.splice(0, 4)

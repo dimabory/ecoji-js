@@ -47,14 +47,13 @@ export default class Mapping implements IMapping {
   }
 
   public getId(rune: string): number {
-
     const id = this.emojis.get(rune)
 
-    if (id) {
-      return id
+    if (undefined === id) {
+      throw Error(`Invalid rune provided: ${rune}`)
     }
 
-    throw Error(`Invalid rune provided: ${rune}`)
+    return id
   }
 
   public getPadding(): string {
