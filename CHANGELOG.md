@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/dimabory/ecoji-js/compare/v1.1.0...v1.1.1) (2019-02-01)
+
+
+### Bug Fixes
+
+* 🀄 emoji ([7f93078](https://github.com/dimabory/ecoji-js/commit/7f93078)), closes [#7](https://github.com/dimabory/ecoji-js/issues/7)
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/dimabory/ecoji-js/compare/v1.0.0...v1.1.0) (2018-07-30)
 
