@@ -36,14 +36,13 @@ export default class Mapping implements IMapping {
   }
 
   public getEmoji(id: number): string {
-
     const emoji = this.revEmojis.get(id)
 
-    if (emoji) {
-      return emoji
+    if (undefined === emoji) {
+      throw Error(`Invalid id provided: ${id}`)
     }
 
-    throw Error(`Invalid id provided: ${id}`)
+    return emoji
   }
 
   public getId(rune: string): number {
