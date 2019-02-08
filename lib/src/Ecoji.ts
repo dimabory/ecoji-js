@@ -16,7 +16,10 @@ export default class Ecoji {
  let output = ''
     const bufferIterator = Buffer.from(input.encode(), encoding)
     const values         = bufferIterator.values()
-
+    if(encoding=="hex" && input.length % 2 > 0){
+		console.warn("Warning: Only hex strings with an even number of characters will be encoded properly. Please add another character to your string to ignore this message. Also, please only use characters from a-f and 0-9");
+		input=input.toLowerCase();
+	}
     let length = bufferIterator.length
 
     while (length > 0) {
@@ -64,6 +67,7 @@ export default class Ecoji {
             case 1:
               output += this.mapping.getPadding41()
               break
+
             case 2:
               output += this.mapping.getPadding42()
               break
@@ -90,10 +94,13 @@ export default class Ecoji {
     return output
   }
 
-  public decode(input: string): string {
+	public decode(input: string){
+		return this.decodeType(input,'binary');
+	}
+  public decodeType(input: string, decodeTo: string): string {
 
     let output = ''
-
+	let outputArray: number[] = [];
     const emojis = input.replace(/(?:\r\n|\r|\n)/g, '').decode().mb_split()
 
     while (emojis.length) {
@@ -122,7 +129,7 @@ export default class Ecoji {
           bits[3] = this.mapping.getId(runes[3])
           break
       }
-
+		
       let out = [
         bits[0] >> 2,
         ((bits[0] & 0x3) << 6) | (bits[1] >> 4),
@@ -145,14 +152,24 @@ export default class Ecoji {
       ].indexOf(runes[3]) !== -1) {
         out = out.slice(0, 4)
       }
-
-      output += out.reduce((result, item) => {
-        result += String.fromCharCode(item)
-        return result
-      }, '')
+	if(decodeTo!="hex"){
+	      output += out.reduce((result, item) => {
+		result += String.fromCharCode(item)
+		return result
+	      }, '')
+	}else{
+		output += out.reduce((result, item) => {
+			outputArray.push(item);
+			return result;
+		},'');
+	}
 
     }
-
+	if(decodeTo=="hex"){
+		var newString = Buffer.from(outputArray);
+		output=newString.toString("hex");
+		//output=newString
+	}
     return output.decode()
   }
 
