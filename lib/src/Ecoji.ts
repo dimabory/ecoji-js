@@ -10,9 +10,11 @@ export default class Ecoji {
   }
 
   public encode(input: string): string {
-    let output = ''
-
-    const bufferIterator = Buffer.from(input.encode(), 'binary')
+		return this.encodeType(input,'binary');
+	}
+  public encodeType(input: string, encoding:string){
+ let output = ''
+    const bufferIterator = Buffer.from(input.encode(), encoding)
     const values         = bufferIterator.values()
 
     let length = bufferIterator.length
