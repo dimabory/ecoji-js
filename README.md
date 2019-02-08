@@ -1,3 +1,13 @@
+#
+
+Fork of ecoji-js
+
+Temporarily, you can install using `npm install o-ecoji-js`
+
+We created this repo to make specific changes to our npm repo more quickly. 
+
+See below readme for dimabory, main author of this library 
+
 # ecoji-js | 1️⃣0️⃣2️⃣4️⃣  👨‍💻🔥#️⃣🌎🛫🕶️
 
 [![npm version](https://badge.fury.io/js/ecoji-js.svg)](https://www.npmjs.com/package/ecoji-js)
