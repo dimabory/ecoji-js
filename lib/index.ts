@@ -1,7 +1,4 @@
-import Ecoji from './src/Ecoji'
-import emoji from './src/emojis'
-/* tslint:disable-next-line:no-unused-expression */
-import './src/ext'
-import Mapping from './src/Mapping'
+import emojis from './emojis'
+import { Ecoji, Mapping } from './src'
 
-export = new Ecoji(new Mapping(emoji))
+export = new Ecoji(new Mapping(emojis))

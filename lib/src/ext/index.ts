@@ -1,3 +1,20 @@
+declare global {
+  /* tslint:disable-next-line:interface-name */
+  interface String {
+    mb_length(): number
+
+    mb_substr(from: number, length?: number): string
+
+    mb_split(): string[]
+
+    has_emoji(): boolean
+
+    encode(): string
+
+    decode(): string
+  }
+}
+
 String.prototype.mb_split = function(): string[] {
   return Array.from(this.split('\u{200D}')[0].split(/[\ufe00-\ufe0f]/).join(''))
 }
@@ -21,3 +38,5 @@ String.prototype.decode = function(): string {
     return this.toString()
   }
 }
+
+export default String.prototype

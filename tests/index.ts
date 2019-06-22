@@ -1,28 +1,28 @@
-import ecoji from '../lib'
-/* tslint:disable-next-line:no-var-requires */
-const data: any[] = require('./test.json')
+import { deepStrictEqual as deepEq, strictEqual as eq, throws } from 'assert'
+import ecoji from '../lib/index'
+import data from './fixtures.json'
 
-describe('ecoji', () => {
+describe('dimabory/ecoji-js test suite', () => {
 
   data.forEach(item => {
     it(`${JSON.stringify(item)} encode/decode`, () => {
-      expect(ecoji.encode(item.input)).toEqual(item.output)
-      expect(ecoji.decode(item.output)).toEqual(item.input)
+      eq(ecoji.encode(item.input), item.output)
+      eq(ecoji.decode(item.output), item.input)
     })
   })
 
   it('should encode/decode unicode', () => {
     const emoji = '🍟'
-    const hash  = '🍝🌫🆓🐊🏦🔦📣🇺🎲🌨☕☕'
+    const hash = '🍝🌫🆓🐊🏦🔦📣🇺🎲🌨☕☕'
 
-    expect(ecoji.encode(emoji)).toEqual(hash)
-    expect(ecoji.decode(hash)).toEqual(emoji)
+    eq(ecoji.encode(emoji), hash)
+    eq(ecoji.decode(hash), emoji)
   })
 
   it('should decoding with new lines', () => {
     const emoji = '🤠'
-    const hash  = '\n\n🍝🌫🆓🐊🏦🔧🌓🇺🏒🙌☕\n☕\n\n'
-    expect(ecoji.decode(hash)).toEqual(emoji)
+    const hash = '\n\n🍝🌫🆓🐊🏦🔧🌓🇺🏒🙌☕\n☕\n\n'
+    eq(ecoji.decode(hash), emoji)
   })
 
   it('should throw an exception Unexpected data provided', () => {
@@ -35,15 +35,15 @@ describe('ecoji', () => {
       '→↑',
       '→↑←',
     ].forEach(item => {
-      expect(() => ecoji.decode(item)).toThrow(new Error('Unexpected emoji sequence provided.'))
+      throws(() => ecoji.decode(item), new Error('Unexpected emoji sequence provided.'))
     })
   })
 
   it('should throw an exception Invalid rune ', () => {
-    expect(() => ecoji.decode('→↑←↓')).toThrow(new Error('Invalid rune provided: →'))
-    expect(
+    throws(() => ecoji.decode('→↑←↓'), new Error('Invalid rune provided: →'))
+    throws(
       () => ecoji.decode(String.fromCharCode(255).repeat(4)),
-    ).toThrow(new Error('Invalid rune provided: ' + String.fromCharCode(255)))
+      new Error('Invalid rune provided: ' + String.fromCharCode(255)))
   })
 
 })
@@ -51,12 +51,12 @@ describe('ecoji', () => {
 describe('keith-turner/ecoji examples', () => {
   it('should encode/decode well', () => {
     const str = 'Base64 is so 1999, isn\'t there something better?'
-    expect(ecoji.encode(str)).toEqual('🏗📩🎦🐇🎛📘🔯🚜💞😽🆖🐊🎱🥁🚄🌱💞😭💮🇵💢🕥🐭🔸🍉🚲🦑🐶💢🕥🔮🔺🍉📸🐮🌼👦🚟🥰☕')
+    eq(ecoji.encode(str), '🏗📩🎦🐇🎛📘🔯🚜💞😽🆖🐊🎱🥁🚄🌱💞😭💮🇵💢🕥🐭🔸🍉🚲🦑🐶💢🕥🔮🔺🍉📸🐮🌼👦🚟🥰☕')
   })
 
   it('should concatenate', () => {
     const str = ecoji.encode('abc') + ecoji.encode('6789') + ecoji.encode('XY')
-    expect(ecoji.decode(str)).toEqual('abc6789XY')
+    eq(ecoji.decode(str), 'abc6789XY')
   })
 
 })
@@ -76,7 +76,7 @@ it('should sort data', () => {
 
   base1024.sort()
 
-  expect(base1024).toEqual([
+  deepEq(base1024, [
     '👕☕☕☕',
     '👖📲☕☕',
     '👖📸🎈☕',
