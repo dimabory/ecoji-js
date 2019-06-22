@@ -1,13 +1,12 @@
 import IMapping from './IMapping'
 
-const padding   = 0x2615
-const padding40 = 0x269C
-const padding41 = 0x1F3CD
-const padding42 = 0x1F4D1
-const padding43 = 0x1F64B
+const padding = 0x2615
+const padding40 = 0x269c
+const padding41 = 0x1f3cd
+const padding42 = 0x1f4d1
+const padding43 = 0x1f64b
 
 export default class Mapping implements IMapping {
-
   private emojis: Map<string, number>
 
   private revEmojis: Map<number, string>
@@ -26,9 +25,14 @@ export default class Mapping implements IMapping {
   private padding43: string = String.fromCodePoint(padding43)
 
   constructor(emojis: string[]) {
-    this.emojis = emojis.reduce((Map, hexUnicode, i) => Map.set(String.fromCodePoint(Number(hexUnicode)), i), new Map())
+    this.emojis = emojis.reduce(
+      (Map, hexUnicode, i) =>
+        Map.set(String.fromCodePoint(Number(hexUnicode)), i),
+      new Map(),
+    )
     this.emojis.set(this.padding, -1)
-    this.revEmojis = emojis.reduce((Map, hexUnicode, i) =>
+    this.revEmojis = emojis.reduce(
+      (Map, hexUnicode, i) =>
         Map.set(i, String.fromCodePoint(Number(hexUnicode))),
       new Map(),
     )
@@ -74,5 +78,4 @@ export default class Mapping implements IMapping {
   public getPadding43(): string {
     return this.padding43
   }
-
 }
