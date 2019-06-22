@@ -1,8 +1,7 @@
-import { Buffer }       from 'buffer'
+import { Buffer } from 'buffer'
 import MappingInterface from './IMapping'
 
 export default class Ecoji {
-
   private mapping: MappingInterface
 
   constructor(mapping: MappingInterface) {
@@ -13,7 +12,7 @@ export default class Ecoji {
     let output = ''
 
     const bufferIterator = Buffer.from(input.encode(), 'binary')
-    const values         = bufferIterator.values()
+    const values = bufferIterator.values()
 
     let length = bufferIterator.length
 
@@ -23,36 +22,34 @@ export default class Ecoji {
       const buffer = []
       for (let i = 0; i < 5; i++) {
         const code = values.next()
-        buffer[i]  = !code.done ? code.value : 0
+        buffer[i] = !code.done ? code.value : 0
       }
 
-      output += this.mapping.getEmoji(buffer[0] << 2 | buffer[1] >> 6)
+      output += this.mapping.getEmoji((buffer[0] << 2) | (buffer[1] >> 6))
       switch (buffer.filter(i => i).length) {
         case 1:
-          output += [
-            this.mapping.getPadding().repeat(3),
-          ].join('')
+          output += [this.mapping.getPadding().repeat(3)].join('')
 
           break
         case 2:
           output += [
-            this.mapping.getEmoji((buffer[1] & 0x3f) << 4 | buffer[2] >> 4),
+            this.mapping.getEmoji(((buffer[1] & 0x3f) << 4) | (buffer[2] >> 4)),
             this.mapping.getPadding().repeat(2),
           ].join('')
 
           break
         case 3:
           output += [
-            this.mapping.getEmoji((buffer[1] & 0x3f) << 4 | buffer[2] >> 4),
-            this.mapping.getEmoji((buffer[2] & 0x0f) << 6 | buffer[3] >> 2),
+            this.mapping.getEmoji(((buffer[1] & 0x3f) << 4) | (buffer[2] >> 4)),
+            this.mapping.getEmoji(((buffer[2] & 0x0f) << 6) | (buffer[3] >> 2)),
             this.mapping.getPadding(),
           ].join('')
 
           break
         case 4:
           output += [
-            this.mapping.getEmoji((buffer[1] & 0x3f) << 4 | buffer[2] >> 4),
-            this.mapping.getEmoji((buffer[2] & 0x0f) << 6 | buffer[3] >> 2),
+            this.mapping.getEmoji(((buffer[1] & 0x3f) << 4) | (buffer[2] >> 4)),
+            this.mapping.getEmoji(((buffer[2] & 0x0f) << 6) | (buffer[3] >> 2)),
           ].join('')
 
           switch (buffer[3] & 0x03) {
@@ -73,35 +70,35 @@ export default class Ecoji {
           break
         case 5:
           output += [
-            this.mapping.getEmoji((buffer[1] & 0x3f) << 4 | buffer[2] >> 4),
-            this.mapping.getEmoji((buffer[2] & 0x0f) << 6 | buffer[3] >> 2),
-            this.mapping.getEmoji((buffer[3] & 0x03) << 8 | buffer[4]),
+            this.mapping.getEmoji(((buffer[1] & 0x3f) << 4) | (buffer[2] >> 4)),
+            this.mapping.getEmoji(((buffer[2] & 0x0f) << 6) | (buffer[3] >> 2)),
+            this.mapping.getEmoji(((buffer[3] & 0x03) << 8) | buffer[4]),
           ].join('')
 
           break
         default:
           break
       }
-
     }
 
     return output
   }
 
   public decode(input: string): string {
-
     let output = ''
 
-    const emojis = input.replace(/(?:\r\n|\r|\n)/g, '').decode().mb_split()
+    const emojis = input
+      .replace(/(?:\r\n|\r|\n)/g, '')
+      .decode()
+      .mb_split()
 
     while (emojis.length) {
-
       if (emojis.length < 4) {
         throw Error('Unexpected emoji sequence provided.')
       }
 
       const runes = emojis.splice(0, 4)
-      const bits  = runes.slice(0, 3).map(emoji => this.mapping.getId(emoji))
+      const bits = runes.slice(0, 3).map(emoji => this.mapping.getId(emoji))
 
       switch (runes[3]) {
         case this.mapping.getPadding40():
@@ -135,12 +132,14 @@ export default class Ecoji {
         out = out.slice(0, 2)
       } else if (runes[3] === this.mapping.getPadding()) {
         out = out.slice(0, 3)
-      } else if ([
-        this.mapping.getPadding40(),
-        this.mapping.getPadding41(),
-        this.mapping.getPadding42(),
-        this.mapping.getPadding43(),
-      ].indexOf(runes[3]) !== -1) {
+      } else if (
+        [
+          this.mapping.getPadding40(),
+          this.mapping.getPadding41(),
+          this.mapping.getPadding42(),
+          this.mapping.getPadding43(),
+        ].indexOf(runes[3]) !== -1
+      ) {
         out = out.slice(0, 4)
       }
 
@@ -148,10 +147,8 @@ export default class Ecoji {
         result += String.fromCharCode(item)
         return result
       }, '')
-
     }
 
     return output.decode()
   }
-
 }

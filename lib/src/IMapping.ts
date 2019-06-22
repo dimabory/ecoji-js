@@ -1,5 +1,4 @@
 export default interface IMapping {
-
   getEmoji(id: number): string
 
   getId(rune: string): number
@@ -13,5 +12,4 @@ export default interface IMapping {
   getPadding42(): string
 
   getPadding43(): string
-
 }

@@ -42,7 +42,7 @@
     "release": "standard-version",
     "postrelease": "npm run release:github && npm run release:npm",
     "prepublish": "npm run build",
-    "prettier": "prettier --config .prettierrc.json --write",
+    "prettier": "prettier --config .prettierrc.json --write ./lib/*/**.ts",
     "build": "rm -rf ./dist && tsc",
     "lint": "tslint --project tsconfig.json --format codeFrame",
     "lint:fix": "npm run lint -- --fix",
@@ -59,7 +59,7 @@
     "conventional-changelog-cli": "2.0.22",
     "cz-conventional-changelog": "^2.1.0",
     "husky": "^2.4.1",
-    "lint-staged": "^7.2.0",
+    "lint-staged": "^8.2.1",
     "mocha": "6.1.4",
     "prettier": "^1.13.7",
     "standard-version": "4.4.0",
@@ -82,18 +82,17 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "lint-staged",
-      "pre-push": "npm run style && npm run test"
+      "pre-push": "npm run test"
     }
   },
   "lint-staged": {
-    "**/*.{ts,tsx,js,jsx,css,scss,sass,less,md}": [
-      "npm run prettier",
-      "git add"
-    ],
-    "lib/**/*.{ts,tsx}": [
-      "npm run lint:fix",
-      "git add"
-    ]
+    "linters": {
+      "lib/**/*.{ts,js}": [
+        "npm run prettier",
+        "npm run lint:fix",
+        "git add"
+      ]
+    }
   },
   "dependencies": {
     "get-stdin": "6.0.0",
