@@ -50,13 +50,15 @@
     "test:coverage": "npm t -- --coverage"
   },
   "devDependencies": {
+    "@commitlint/cli": "8.0.0",
+    "@commitlint/config-conventional": "8.0.0",
     "@types/emojione": "^2.2.2",
     "@types/mocha": "5.2.7",
     "buffer": "5.1.0",
     "commitizen": "3.1.1",
     "conventional-changelog-cli": "2.0.22",
     "cz-conventional-changelog": "^2.1.0",
-    "husky": "^0.14.3",
+    "husky": "^2.4.1",
     "lint-staged": "^7.2.0",
     "mocha": "6.1.4",
     "prettier": "^1.13.7",
@@ -64,22 +66,21 @@
     "ts-node": "8.3.0",
     "tslint": "^5.18.0",
     "typedoc": "0.14.2",
-    "typescript": "^3.4.0",
-    "validate-commit-msg": "^2.14.0"
+    "typescript": "^3.4.0"
   },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
-    },
-    "validate-commit-msg": {
-      "types": "conventional-commit-types",
-      "maxSubjectLength": 120
     }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "husky": {
     "hooks": {
-      "commit-msg": "validate-commit-msg",
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "lint-staged",
       "pre-push": "npm run style && npm run test"
     }
