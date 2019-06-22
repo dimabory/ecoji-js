@@ -53,27 +53,27 @@
     "@types/emojione": "^2.2.2",
     "@types/jasmine": "^2.8.8",
     "buffer": "5.1.0",
-    "commitizen": "^2.10.1",
-    "conventional-changelog-cli": "^2.0.1",
+    "commitizen": "3.1.1",
+    "conventional-changelog-cli": "2.0.22",
     "cz-conventional-changelog": "^2.1.0",
     "husky": "^0.14.3",
     "jasmine": "^3.1.0",
-    "karma": "4.0.0",
+    "karma": "4.1.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-jasmine": "^1.1.2",
-    "karma-typescript": "^3.0.13",
+    "karma-typescript": "4.1.0",
     "lint-staged": "^7.2.0",
     "prettier": "^1.13.7",
-    "puppeteer": "^1.6.0-next.1532381444032",
+    "puppeteer": "1.18.0",
     "standard-version": "4.4.0",
     "tslint": "^5.11.0",
-    "typedoc": "^0.11.1",
+    "typedoc": "0.14.2",
     "typescript": "^2.9.2",
     "validate-commit-msg": "^2.14.0"
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+      "path": "cz-conventional-changelog"
     },
     "validate-commit-msg": {
       "types": "conventional-commit-types",
@@ -83,6 +83,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "validate-commit-msg",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook",
       "pre-commit": "lint-staged",
       "pre-push": "npm run style && npm run test"
     }

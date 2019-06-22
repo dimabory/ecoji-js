@@ -3,6 +3,7 @@
 [![npm version](https://badge.fury.io/js/ecoji-js.svg)](https://www.npmjs.com/package/ecoji-js)
 [![Build Status](https://travis-ci.com/dimabory/ecoji-js.svg?branch=master)](https://travis-ci.com/dimabory/ecoji-js)
 [![codecov](https://codecov.io/gh/dimabory/ecoji-js/branch/master/graph/badge.svg)](https://codecov.io/gh/dimabory/ecoji-js)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
 
 A JavaScript implementation of the [Ecoji](https://github.com/keith-turner/ecoji) encoding standard. Provides a simple API to encode or/and decode data as a base-1024 sequence of emoji symbols.
